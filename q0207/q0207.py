@@ -8,7 +8,7 @@ class Solution:
 
         visitedCourse = set()
 
-        def dfs(course):
+        def dfsCheckCycle(course):
             if course in visitedCourse:
                 return False
             if preReqMap[course] == []:
@@ -16,13 +16,13 @@ class Solution:
 
             visitedCourse.add(course)
             for preReq in preReqMap[course]:
-                if not dfs(preReq):
+                if not dfsCheckCycle(preReq):
                     return False
             visitedCourse.remove(course)
             preReqMap[course] = []
             return True
 
         for course in range(numCourses):
-            if not dfs(course):
+            if not dfsCheckCycle(course):
                 return False
         return True

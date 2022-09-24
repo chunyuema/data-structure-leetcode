@@ -14,13 +14,13 @@ class Solution {
         }
         HashSet<Integer> visited = new HashSet<>();
         for (int i = 0; i < numCourses; i++) {
-            if (!dfsCheck(visited, preReqMap, i))
+            if (!dfsCheckCycle(visited, preReqMap, i))
                 return false;
         }
         return true;
     }
 
-    private boolean dfsCheck(HashSet<Integer> visited,
+    private boolean dfsCheckCycle(HashSet<Integer> visited,
             Map<Integer, List<Integer>> preReqMap,
             int c) {
         if (visited.contains(c))
@@ -29,7 +29,7 @@ class Solution {
             return true;
         visited.add(c);
         for (int preReq : preReqMap.get(c)) {
-            if (!dfsCheck(visited, preReqMap, preReq))
+            if (!dfsCheckCycle(visited, preReqMap, preReq))
                 return false;
         }
         visited.remove(c);
